@@ -29,6 +29,9 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("PPP", "onBindViewHolder position = $position")
+        Log.d("PPP", "onBindViewHolder index = $index")
+
         // bind data
         val itemModel: ItemModel = dataList[position]
         holder.bind(itemModel)
@@ -38,8 +41,8 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
 
         // set onFocusChangeListener
         holder.itemView.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if(hasFocus) holder.itemView.setBackgroundColor(Color.YELLOW)
-            else holder.itemView.setBackgroundColor(Color.parseColor("#AAAAAA"))
+            if(hasFocus) holder.itemView.setBackgroundColor(Color.GRAY)
+            else holder.itemView.setBackgroundColor(Color.parseColor("#393D44"))
             Log.d("PPP", "onFocusChangeListener $hasFocus,$position")
         }
 
@@ -48,23 +51,37 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
                 if(event?.action!= null){
                     if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.action == KeyEvent.ACTION_DOWN){ // 按下遙控器下鍵
-                        onItemVerticalMove(position,position + 5) // 執行垂直移動的動畫
-                        index = position + 5 // 記錄新的 index
+//                        onItemVerticalMove(position,position + 5) // 執行垂直移動的動畫
+//                        index = position + 5 // 記錄新的 index
 
-                        // handler 等一秒再做，才可以看到移動的動畫
-                        Handler().postDelayed({
-                            notifyDataSetChanged() // 移動完要刷新資料
-                        },1000)
+                        onItemVerticalMove(holder.adapterPosition,holder.adapterPosition + 5) // 執行垂直移動的動畫
+                        index = holder.adapterPosition // 記錄新的 index
+
+                        Log.d("PPP","position = $position")
+                        Log.d("PPP","index = $index")
+                        Log.d("PPP","holder.adapterPosition = ${holder.adapterPosition}")
+
+//                        // handler 等一秒再做，才可以看到移動的動畫
+//                        Handler().postDelayed({
+//                            notifyDataSetChanged() // 移動完要刷新資料
+//                        },1000)
 
                         return true
                     } else if(keyCode == KeyEvent.KEYCODE_DPAD_UP && event.action == KeyEvent.ACTION_DOWN){ // 按下遙控器上鍵
-                        onItemVerticalMove(position,position - 5) // 執行垂直移動的動畫
-                        index = position - 5 // 記錄新的 index
+//                        onItemVerticalMove(position,position - 5) // 執行垂直移動的動畫
+//                        index = position - 5 // 記錄新的 index
 
-                        // handler 等一秒再做，才可以看到移動的動畫
-                        Handler().postDelayed({
-                            notifyDataSetChanged() // 移動完要刷新資料
-                        },1000)
+                        onItemVerticalMove(holder.adapterPosition,holder.adapterPosition - 5) // 執行垂直移動的動畫
+                        index = holder.adapterPosition // 記錄新的 index
+
+                        Log.d("PPP","position = $position")
+                        Log.d("PPP","index = $index")
+                        Log.d("PPP","holder.adapterPosition = ${holder.adapterPosition}")
+
+//                        // handler 等一秒再做，才可以看到移動的動畫
+//                        Handler().postDelayed({
+//                            notifyDataSetChanged() // 移動完要刷新資料
+//                        },1000)
 
                         return true
                     }
@@ -73,7 +90,7 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
             }
         })
 
-        if(index == position) { // 只有一個焦點
+        if(position == index) { // 只有一個焦點
             holder.itemView.requestFocus() // 請求焦點
         }
     }
