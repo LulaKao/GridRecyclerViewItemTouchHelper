@@ -53,13 +53,13 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
                     if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.action == KeyEvent.ACTION_DOWN){ // 按下遙控器下鍵
 //                        onItemVerticalMove(position,position + 5) // 執行垂直移動的動畫
 //                        index = position + 5 // 記錄新的 index
-
+//
                         onItemVerticalMove(holder.adapterPosition,holder.adapterPosition + 5) // 執行垂直移動的動畫
                         index = holder.adapterPosition // 記錄新的 index
-
-                        Log.d("PPP","position = $position")
-                        Log.d("PPP","index = $index")
-                        Log.d("PPP","holder.adapterPosition = ${holder.adapterPosition}")
+//
+//                        Log.d("PPP","position = $position")
+//                        Log.d("PPP","index = $index")
+//                        Log.d("PPP","holder.adapterPosition = ${holder.adapterPosition}")
 
 //                        // handler 等一秒再做，才可以看到移動的動畫
 //                        Handler().postDelayed({
@@ -73,10 +73,10 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
 
                         onItemVerticalMove(holder.adapterPosition,holder.adapterPosition - 5) // 執行垂直移動的動畫
                         index = holder.adapterPosition // 記錄新的 index
-
-                        Log.d("PPP","position = $position")
-                        Log.d("PPP","index = $index")
-                        Log.d("PPP","holder.adapterPosition = ${holder.adapterPosition}")
+//
+//                        Log.d("PPP","position = $position")
+//                        Log.d("PPP","index = $index")
+//                        Log.d("PPP","holder.adapterPosition = ${holder.adapterPosition}")
 
 //                        // handler 等一秒再做，才可以看到移動的動畫
 //                        Handler().postDelayed({
@@ -103,9 +103,7 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
         dataList.removeAt(fromPosition) // 移除被選中的 item
         dataList.add(toPosition, itemSelected) // 把被選中的 item 加到 toPosition
         notifyItemMoved(fromPosition,toPosition) // 移動被選中的 item（帶有動畫效果）
-        Log.d("test", "onItemVerticalMove ===")
-        Log.d("test", "fromPosition = $fromPosition")
-        Log.d("test", "fromPosition = $toPosition")
+        Log.d("test", "onItemVerticalMove from $fromPosition to $toPosition")
 
 //        Collections.swap(dataList,fromPosition,toPosition) // 這是兩個 item 互相交換
     }
