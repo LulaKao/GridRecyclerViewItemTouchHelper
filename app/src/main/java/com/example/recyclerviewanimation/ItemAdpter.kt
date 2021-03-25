@@ -1,7 +1,6 @@
 package com.example.recyclerviewanimation
 
 import android.graphics.Color
-import android.os.Handler
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewanimation.databinding.ItemCardBinding
-import kotlin.collections.ArrayList
 
 class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>(), ItemHelperInterface {
@@ -67,6 +65,7 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
 //                        },1000)
 
                         return true
+
                     } else if(keyCode == KeyEvent.KEYCODE_DPAD_UP && event.action == KeyEvent.ACTION_DOWN){ // 按下遙控器上鍵
 //                        onItemVerticalMove(position,position - 5) // 執行垂直移動的動畫
 //                        index = position - 5 // 記錄新的 index
@@ -83,6 +82,16 @@ class ItemAdapter(private val dataList: ArrayList<ItemModel>) :
 //                            notifyDataSetChanged() // 移動完要刷新資料
 //                        },1000)
 
+                        return true
+
+                    } else if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT && event.action == KeyEvent.ACTION_DOWN){ // 按下遙控器左鍵
+                        onItemVerticalMove(holder.adapterPosition,holder.adapterPosition - 1) // 執行水平移動的動畫
+                        index = holder.adapterPosition // 記錄新的 index
+                        return true
+
+                    } else if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && event.action == KeyEvent.ACTION_DOWN){ // 按下遙控器右鍵
+                        onItemVerticalMove(holder.adapterPosition,holder.adapterPosition + 1) // 執行水平移動的動畫
+                        index = holder.adapterPosition // 記錄新的 index
                         return true
                     }
                 }
